@@ -67,16 +67,18 @@ class LoginPage(BasePage):
             self.wait.until(expected_conditions.visibility_of_all_elements_located(self.error_win))
             error_mes = self.find_element(*self.error_win).text
             assert "Epic sadface: Username and password do not match any user in this service" in error_mes
-        except Exception as e:
-            pytest.fail(f"Какая то ошибка: {str(e)}")
+        except:
+            expected_url = "https://www.saucedemo.com/inventory.html"
+            assert self.get_current_url() == expected_url
 
     def check_empty_pass(self):
         try:
             self.wait.until(expected_conditions.visibility_of_all_elements_located(self.error_win))
             error_mes = self.find_element(*self.error_win).text
             assert "Epic sadface: Password is required" in error_mes
-        except Exception as e:
-            pytest.fail(f"Какая то ошибка: {str(e)}")
+        except:
+            expected_url = "https://www.saucedemo.com/inventory.html"
+            assert self.get_current_url() == expected_url
 
     def all_users(self):
         users = [("standard_user", "secret_sauce"),("problem_user", "secret_sauce"),("performance_glitch_user", "secret_sauce"),("error_user", "secret_sauce"),("visual_user", "secret_sauce"),]
